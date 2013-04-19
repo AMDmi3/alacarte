@@ -54,6 +54,12 @@ public:
 		ROUNDED = 0,
 		RECTANGULAR
 	};
+	enum TextTransform {
+		TRANSFORM_NONE = 0,
+		TRANSFORM_UPPERCASE,
+		TRANSFORM_LOWERCASE,
+		TRANSFORM_CAPITALIZE,
+	};
 
 	/**
 	 * @brief Takes all non-"null" (meaning only properties that were explicitely set) properties from the given StyleTemplate
@@ -82,6 +88,7 @@ public:
 	Color text_color;
 	double text_offset;
 	double font_size;
+	TextTransform text_transform;
 
 	// The colour (hex or CSS) of the 'halo' or 'pull-out' used to make the text stand out from features underneath it
 	Color text_halo_color;
@@ -172,6 +179,24 @@ Stream& operator >> (Stream& stream, Style::ShieldShape& shape)
 		shape = Style::ROUNDED;
 	else if(expr == "rectangular")
 		shape = Style::RECTANGULAR;
+
+	return stream;
+}
+
+template<typename Stream>
+Stream& operator >> (Stream& stream, Style::TextTransform& shape)
+{
+	string expr;
+	stream >> expr;
+
+	if(expr == "none")
+		shape = Style::TRANSFORM_NONE;
+	else if(expr == "uppercase")
+		shape = Style::TRANSFORM_UPPERCASE;
+	else if(expr == "lowercase")
+		shape = Style::TRANSFORM_LOWERCASE;
+	else if(expr == "capitalize")
+		shape = Style::TRANSFORM_CAPITALIZE;
 
 	return stream;
 }

@@ -49,6 +49,7 @@ line[highway=secondary_link]
 	z-index: 3;
 	color: #ff6b6b;
 	casing-color: #8e3636;
+	text-transform: lowercase;
 }
 area[highway=secondary],
 area[highway=secondary_link]

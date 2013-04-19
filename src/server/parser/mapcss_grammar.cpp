@@ -84,6 +84,7 @@ AttributeTypes::AttributeTypes()
 		("text-color", CreateAttribute(&StyleTemplate::text_color))
 		("text-offset", CreateAttribute(&StyleTemplate::text_offset))
 		("text-position", CreateAttribute(&StyleTemplate::text_position))
+		("text-transform", CreateAttribute(&StyleTemplate::text_transform))
 		("text", CreateAttribute(&StyleTemplate::text))
 
 		("text-halo-color", CreateAttribute(&StyleTemplate::text_halo_color))

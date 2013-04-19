@@ -59,6 +59,7 @@ public:
 	shared_ptr< eval::Eval<Color> > text_color;
 	shared_ptr< eval::Eval<double> > text_offset;
 	shared_ptr< eval::Eval<double> > font_size;
+	shared_ptr< eval::Eval<Style::TextTransform> > text_transform;
 
 	shared_ptr< eval::Eval<Color> > text_halo_color;
 	shared_ptr< eval::Eval<double> > text_halo_radius;

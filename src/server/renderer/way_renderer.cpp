@@ -21,6 +21,7 @@
 #include "includes.hpp"
 
 #include <boost/unordered_map.hpp>
+#include <boost/algorithm/string.hpp>
 
 #include "general/geodata.hpp"
 #include "general/way.hpp"
@@ -258,7 +259,23 @@ void WayRenderer::label(const Cairo::RefPtr<Cairo::Context>& cr,
 
 			cr->move_to(-textSize.width/2.0 - textSize.x_bearing,
 						-textSize.height/2.0 - textSize.y_bearing);
-			cr->text_path(s->text.str());
+
+			string text = s->text.str();
+			switch (s->text_transform) {
+			case Style::TRANSFORM_UPPERCASE:
+				boost::to_upper(text);
+				break;
+			case Style::TRANSFORM_LOWERCASE:
+				boost::to_lower(text);
+				break;
+			case Style::TRANSFORM_CAPITALIZE:
+				// TODO
+				break;
+			default:
+				break;
+			}
+
+			cr->text_path(text);
 
 			if (s->text_halo_radius > 0.0)
 			{

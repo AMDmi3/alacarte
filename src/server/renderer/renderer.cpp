@@ -30,6 +30,7 @@
  */
 #include "config.hpp"
 #include <boost/unordered_map.hpp>
+#include <boost/algorithm/string.hpp>
 #include <sigc++/bind.h>
 
 #include "utils/transform.hpp"
@@ -474,7 +475,23 @@ void Renderer::renderLabels(const Cairo::RefPtr<Cairo::Context>& cr,
 		cr->set_font_size(s->font_size);
 
 		cr->move_to(label->origin.x, label->origin.y);
-		cr->text_path(label->text.str());
+
+		string text = label->text.str();
+		switch (s->text_transform) {
+		case Style::TRANSFORM_UPPERCASE:
+			boost::to_upper(text);
+			break;
+		case Style::TRANSFORM_LOWERCASE:
+			boost::to_lower(text);
+			break;
+		case Style::TRANSFORM_CAPITALIZE:
+			// TODO
+			break;
+		default:
+			break;
+		}
+
+		cr->text_path(text);
 
 		if (s->text_halo_radius > 0.0)
 		{
